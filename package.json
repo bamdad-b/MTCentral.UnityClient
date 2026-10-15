@@ -1,9 +1,0 @@
-{
-  "name": "com.manataz.mtcentral",
-  "version": "1.0.0",
-  "displayName": "MTCentral Unity Client",
-  "description": "A reusable Unity client library for connecting to MTCentral APIs, WebSocket and notification system.",
-  "author": {
-    "name": "Bamdad Bastani"
-  }
-}
