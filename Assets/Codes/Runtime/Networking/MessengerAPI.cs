@@ -57,7 +57,7 @@ public sealed class MessengerAPI
     {
         var path =
             $"api/social/messenger/GetUserChats" +
-            $"?userId={Query(userId.ToString())}" +
+            $"?userId={Query(MTCentralService.userId.ToString())}" +
             $"&pageSize={Query(pageSize)}" +
             $"&pageIndex={Query(pageIndex)}";
 
