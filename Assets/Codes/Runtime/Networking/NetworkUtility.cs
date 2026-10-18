@@ -1,5 +1,6 @@
 
 using System;
+using System.Collections;
 using System.Globalization;
 using System.Text;
 using UnityEngine;
@@ -19,6 +20,7 @@ namespace MTCentral
 
         public string baseUrl = "http://127.0.0.1:5000";
         public int timeoutSeconds = 30;
+        internal static string AccessToken;
 
         public string BaseUrl
         {
@@ -77,6 +79,17 @@ namespace MTCentral
                 return absolute.ToString();
 
             return $"{BaseUrl}/{path.TrimStart('/')}";
+        }
+
+        internal void GetToken(Action callback)
+        {
+            Create<TokenDto>("/api/security/GetUserToken?userId=" + MTCentralService.userId).OnSuccess(t =>
+            {
+                AccessToken = t.token;
+                WebSocketClient.Configure();
+                var ws = gameObject.AddComponent<WebSocketClient>();
+                callback();
+            });
         }
 
         public sealed class RequestBuilder<TResponse>

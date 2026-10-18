@@ -25,6 +25,12 @@ namespace MTCentral
         public string Username;
     }
 
+    [Serializable]
+    public sealed class TokenDto
+    {
+        public string token;
+    }
+
     public enum UserRelationMode
     {
         Requested,
@@ -66,6 +72,21 @@ namespace MTCentral
         string WHO { get; set; }
         ChatMessageMode Mode { get; set; }
         UserDescriptorDto User { get; set; }
+    }
+
+    [Serializable]
+    public class WebSocketMessengerModel
+    {
+        public string MessageType { get; set; } = default!;
+    }
+
+    [Serializable]
+    public sealed class WebSocketGeneralMessengerModel : WebSocketMessengerModel
+    {
+        public long Chat_Id;
+        public string Content;
+        public long? ReplayedMessage_Id;
+        public ChatMessageMode Mode;
     }
 
     [Serializable]

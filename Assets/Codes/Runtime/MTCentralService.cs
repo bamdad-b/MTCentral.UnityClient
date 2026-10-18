@@ -6,7 +6,7 @@ namespace MTCentral
     public class MTCentralService
     {
         internal static Guid userId;
-        public void Initialize(Guid userId, string apiUrl)
+        public void Initialize(Guid userId, string apiUrl, Action callback)
         {
             if (NetworkUtility.Instance == null)
             {
@@ -14,6 +14,7 @@ namespace MTCentral
                 var nugo = new GameObject("MTCentral");
                 var nu = nugo.AddComponent<NetworkUtility>();
                 nu.BaseUrl = apiUrl;
+                nu.GetToken(callback);
             }
         }
 
