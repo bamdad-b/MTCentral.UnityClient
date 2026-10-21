@@ -109,7 +109,7 @@ namespace MTCentral
                     socket = current;
 
                     await current.ConnectAsync(
-                        new Uri(serverUrl),
+                        new Uri(serverUrl + "/ws/massenger"),
                         cancellationToken);
 
                     delay = TimeSpan.FromSeconds(reconnectDelay);
