@@ -75,9 +75,15 @@ namespace MTCentral
     }
 
     [Serializable]
+    public class WebSocketInitModel
+    {
+        public string Id;
+    }
+
+    [Serializable]
     public class WebSocketMessengerModel
     {
-        public string MessageType { get; set; } = default!;
+        public string MessageType;
     }
 
     [Serializable]

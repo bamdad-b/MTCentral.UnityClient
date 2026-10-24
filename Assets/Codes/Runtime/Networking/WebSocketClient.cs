@@ -112,6 +112,8 @@ namespace MTCentral
                         new Uri(serverUrl + "/ws/massenger"),
                         cancellationToken);
 
+                    await SendAsync(new WebSocketInitModel { Id = MTCentralService.userId.ToString() }, cancellationToken);
+
                     delay = TimeSpan.FromSeconds(reconnectDelay);
 
                     RaiseOnMainThread(() => Connected?.Invoke());
@@ -196,6 +198,12 @@ namespace MTCentral
             }
         }
 
+        public Task SendAsync(object message, CancellationToken cancellationToken = default)
+        {
+            return SendJsonAsync(
+                JsonUtility.ToJson(message),
+                cancellationToken);
+        }
         /// <summary>
         /// Sends an already serialized JSON message.
         /// </summary>
