@@ -90,6 +90,7 @@ namespace MTCentral
     public sealed class WebSocketGeneralMessengerModel : WebSocketMessengerModel
     {
         public long Chat_Id;
+        public long ChatMessage_Id;
         public string Content;
         public long? ReplayedMessage_Id;
         public ChatMessageMode Mode;

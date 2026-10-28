@@ -95,16 +95,16 @@ namespace MTCentral
                     current = new ClientWebSocket();
 
                     // Matches the server's WebSocketAcceptContext.
-                    current.Options.AddSubProtocol("auth");
+                    //current.Options.AddSubProtocol("auth");
 
-                    var token = NetworkUtility.AccessToken;
+                    //var token = NetworkUtility.AccessToken;
 
-                    if (!string.IsNullOrWhiteSpace(token))
-                    {
-                        current.Options.SetRequestHeader(
-                            "Authorization",
-                            $"Bearer {token}");
-                    }
+                    //if (!string.IsNullOrWhiteSpace(token))
+                    //{
+                    //    current.Options.SetRequestHeader(
+                    //        "Authorization",
+                    //        $"Bearer {token}");
+                    //}
 
                     socket = current;
 
@@ -251,6 +251,31 @@ namespace MTCentral
                 Content = text,
                 Chat_Id = chatId,
                 Mode = mode
+            };
+
+            return SendJsonAsync(
+                JsonUtility.ToJson(message),
+                cancellationToken);
+        }
+        public Task DeleteMessageAsync(long chatMessageId, CancellationToken cancellationToken = default)
+        {
+            var message = new WebSocketGeneralMessengerModel
+            {
+                MessageType = "delete",
+                ChatMessage_Id = chatMessageId,
+            };
+
+            return SendJsonAsync(
+                JsonUtility.ToJson(message),
+                cancellationToken);
+        }
+        public Task EditMessageAsync(long chatMessageId, string text, CancellationToken cancellationToken = default)
+        {
+            var message = new WebSocketGeneralMessengerModel
+            {
+                MessageType = "edit",
+                ChatMessage_Id = chatMessageId,
+                Content = text
             };
 
             return SendJsonAsync(
